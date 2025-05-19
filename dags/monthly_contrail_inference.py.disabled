@@ -1,0 +1,78 @@
+from airflow import DAG
+from airflow.providers.standard.sensors.filesystem import FileSensor
+from airflow.providers.standard.operators.python import PythonOperator
+from datetime import datetime, timedelta
+from functools import partial
+
+from scripts.merge_sources import merge_sources
+from scripts.inference import run_inference
+from scripts.extract_airports import extract_airports_data
+
+
+default_args = {
+    'owner': 'airflow',
+    'start_date': datetime(2025, 2, 1),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=10),
+}
+
+
+def build_path(subfolder: str, prefix: str, execution_date) -> str:
+    """
+    Build the path to the CSV file based on the subfolder, prefix, and execution date.
+    Args:
+        subfolder (str): Subfolder name (e.g., 'raw_data', 'merged_data', 'results')
+        prefix (str): Prefix for the file name
+        execution_date (datetime): Execution date of the DAG run
+    Returns:
+        str: Full path to the CSV file e.g., '/data/raw_data/flight_2025_02.csv'
+    """
+    month_str = (execution_date - timedelta(days=1)).strftime('%Y_%m')
+    return f"/data/{subfolder}/{prefix}_{month_str}.csv"
+
+build_raw_file = partial(build_path, subfolder="raw_data")
+build_merged_file = partial(build_path, subfolder="merged_data")
+build_result_file = partial(build_path, subfolder="results")
+
+
+with DAG(
+    dag_id='monthly_contrail_inference',
+    default_args=default_args,
+    schedule='@monthly',
+    catchup=True,
+    max_active_runs=3,
+    description="Monthly DAG to infer contrail impact once all data files are available",
+) as dag:
+    
+    sensors = []
+    for file_type in ['flight', 'aircraft', 'airport']:
+        sensor = FileSensor(
+            task_id=f'wait_for_{file_type}',
+            filepath=build_raw_file(file_type, '{{ execution_date }}'),
+            poke_interval=60*60*6,  # 6 hours
+            timeout=60*60*24*31,      # 31 days
+            mode='reschedule'
+        )
+        sensors.append(sensor)
+        
+    
+    merge_task = PythonOperator(
+        task_id='merge_sources',
+        python_callable=merge_sources,
+        op_kwargs={
+            'flight_path': build_raw_file("flight", '{{ execution_date }}'),
+            'aircraft_path': build_raw_file("aircraft", '{{ execution_date }}'),
+            'airport_path': build_raw_file("airport", '{{ execution_date }}'),
+            'output_path': build_merged_file("merged", '{{ execution_date }}')
+        }
+    )
+
+    inference_task = PythonOperator(
+        task_id='run_inference',
+        python_callable=run_inference,
+        op_kwargs={
+            'input_path': build_merged_file("merged", '{{ execution_date }}'),
+            'output_path': build_result_file("results", '{{ execution_date }}')
+        }
+    )
+    sensors >> merge_task >> inference_task #type: ignore
