@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from scripts.preprocess import preprocess_df, validate_input
-from scripts.config import COLUMN_MAPPING
-from scripts.predictor import ContrailPredictor
+from contrails.preprocess import preprocess_df, validate_input
+from contrails.config import COLUMN_MAPPING
+from contrails.predictor import ContrailPredictor
 
 def test_validate_input_success():
     data = {v: ["dummy"] for v in COLUMN_MAPPING.values()}

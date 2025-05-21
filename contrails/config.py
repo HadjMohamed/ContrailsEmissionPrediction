@@ -1,19 +1,17 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+from airflow.models import Variable # type: ignore
 
-BASE_DATA_DIR = Path(os.getenv("DATA_DIR", Path(__file__).resolve().parent.parent / "data"))
-RAW_DATA_DIR = BASE_DATA_DIR / "raw_data"
-
-BASE_MODEL_DIR = Path(os.getenv("MODEL_DIR", Path(__file__).resolve().parent.parent / "model"))
+BASE_DATA_DIR=Variable.get("DATA_DIR")
+RAW_DATA_DIR = os.path.join(BASE_DATA_DIR,"raw_data")
+BASE_MODEL_DIR = Path(Variable.get("MODEL_DIR"), Path(__file__).resolve().parent.parent / "model")
 MODEL_FILE="xgboost_contrails_model.json"
 ENCODER_FILE="label_encoders.pkl"
 FEATURE_FILE="model_features.pkl"
 
-AIRPORTS_API=os.getenv("AIRPORTS_API","")
-AIRPORTS_URL = os.getenv("AIRPORTS_URL", "")
+AIRPORTS_API=Variable.get("AIRPORTS_API")
+AIRPORTS_URL = Variable.get("AIRPORTS_URL")
 IATA_COL = "iata_code"
 ICAO_COL = "icao_code"
 

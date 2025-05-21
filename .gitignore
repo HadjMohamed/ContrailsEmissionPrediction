@@ -2,3 +2,9 @@
 .python-version
 __pycache__/
 extraction_test.ipynb
+Makefile
+docker-compose.yaml
+Dockerfile
+default.env
+plugins/
+logs/
