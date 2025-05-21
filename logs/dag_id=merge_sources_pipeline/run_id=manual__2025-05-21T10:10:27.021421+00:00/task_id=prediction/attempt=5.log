@@ -1,0 +1,20 @@
+[2025-05-21T10:25:32.181+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T10:25:32.223+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.prediction manual__2025-05-21T10:10:27.021421+00:00 [queued]>
+[2025-05-21T10:25:32.251+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.prediction manual__2025-05-21T10:10:27.021421+00:00 [queued]>
+[2025-05-21T10:25:32.252+0000] {taskinstance.py:2867} INFO - Starting attempt 5 of 6
+[2025-05-21T10:25:32.278+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): prediction> on 2025-05-21 10:10:27.021421+00:00
+[2025-05-21T10:25:32.307+0000] {standard_task_runner.py:72} INFO - Started process 1851 to run task
+[2025-05-21T10:25:32.318+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'prediction', 'manual__2025-05-21T10:10:27.021421+00:00', '--job-id', '131', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmp54bcwf0e']
+[2025-05-21T10:25:32.328+0000] {standard_task_runner.py:105} INFO - Job 131: Subtask prediction
+[2025-05-21T10:25:32.461+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.prediction manual__2025-05-21T10:10:27.021421+00:00 [running]> on host c735ccec6410
+[2025-05-21T10:25:32.653+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='prediction' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T10:10:27.021421+00:00' AIRFLOW_CTX_TRY_NUMBER='5' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T10:10:27.021421+00:00'
+[2025-05-21T10:25:32.656+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T10:25:32.700+0000] {logging_mixin.py:190} INFO - Columns in df: ['Aircraft', 'Engine', 'Seats', 'Origin Airport', 'Destination Airport', 'Distance Flown (km)', 'CO2 (kgCO2e)', 'Month', 'Day', 'Weekday', 'Takeoff_Hour']
+[2025-05-21T10:25:32.700+0000] {logging_mixin.py:190} INFO - Expected features: ['Aircraft', 'Engine', 'Seats', 'Origin Airport', 'Destination Airport', 'Distance Flown (km)', 'CO2 (kgCO2e)', 'Month', 'Day', 'Weekday', 'Takeoff_Hour']
+[2025-05-21T10:25:32.716+0000] {log.py:232} WARNING - 2025-05-21 10:25:32.715 | SUCCESS  | scripts.inference:run_inference:18 - Predictions succeeded !
+[2025-05-21T10:25:32.727+0000] {python.py:240} INFO - Done. Returned value was: [{'Aircraft': 'A320', 'Engine': 'PW1127G-JM', 'Seats': 180.0, 'Origin Airport': 'GCLP', 'Destination Airport': 'LEBL', 'Distance Flown (km)': 5500, 'CO2 (kgCO2e)': 1287.93, 'Month': 1, 'Day': 9, 'Weekday': 3, 'Takeoff_Hour': 15, 'Predicted_Contrail_Impact': 333148.9375}]
+[2025-05-21T10:25:32.774+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T10:25:32.775+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=prediction, run_id=manual__2025-05-21T10:10:27.021421+00:00, execution_date=20250521T101027, start_date=20250521T102532, end_date=20250521T102532
+[2025-05-21T10:25:32.859+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T10:25:32.898+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T10:25:32.903+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

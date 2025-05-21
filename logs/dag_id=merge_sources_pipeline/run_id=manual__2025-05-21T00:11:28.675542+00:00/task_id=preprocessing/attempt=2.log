@@ -1,0 +1,20 @@
+[2025-05-21T00:16:48.176+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T00:16:48.220+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.preprocessing manual__2025-05-21T00:11:28.675542+00:00 [queued]>
+[2025-05-21T00:16:48.240+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.preprocessing manual__2025-05-21T00:11:28.675542+00:00 [queued]>
+[2025-05-21T00:16:48.241+0000] {taskinstance.py:2867} INFO - Starting attempt 2 of 2
+[2025-05-21T00:16:48.263+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): preprocessing> on 2025-05-21 00:11:28.675542+00:00
+[2025-05-21T00:16:48.284+0000] {standard_task_runner.py:72} INFO - Started process 493 to run task
+[2025-05-21T00:16:48.294+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'preprocessing', 'manual__2025-05-21T00:11:28.675542+00:00', '--job-id', '70', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmpplce_2ks']
+[2025-05-21T00:16:48.302+0000] {standard_task_runner.py:105} INFO - Job 70: Subtask preprocessing
+[2025-05-21T00:16:48.407+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.preprocessing manual__2025-05-21T00:11:28.675542+00:00 [running]> on host 7f42758d044f
+[2025-05-21T00:16:48.574+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='preprocessing' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T00:11:28.675542+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T00:11:28.675542+00:00'
+[2025-05-21T00:16:48.577+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T00:16:48.606+0000] {warnings.py:109} WARNING - /opt/***/scripts/preprocess.py:41: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  df["Take-off Time (UTC)"] = pd.to_datetime(df["Take-off Time (UTC)"], errors='coerce')
+
+[2025-05-21T00:16:48.628+0000] {python.py:240} INFO - Done. Returned value was: []
+[2025-05-21T00:16:48.675+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T00:16:48.676+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=preprocessing, run_id=manual__2025-05-21T00:11:28.675542+00:00, execution_date=20250521T001128, start_date=20250521T001648, end_date=20250521T001648
+[2025-05-21T00:16:48.750+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T00:16:48.796+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T00:16:48.800+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

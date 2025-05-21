@@ -1,0 +1,17 @@
+[2025-05-21T00:12:43.261+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T00:12:43.305+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.aircraft_extraction manual__2025-05-21T00:12:38.907965+00:00 [queued]>
+[2025-05-21T00:12:43.328+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.aircraft_extraction manual__2025-05-21T00:12:38.907965+00:00 [queued]>
+[2025-05-21T00:12:43.329+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-05-21T00:12:43.354+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): aircraft_extraction> on 2025-05-21 00:12:38.907965+00:00
+[2025-05-21T00:12:43.378+0000] {standard_task_runner.py:72} INFO - Started process 414 to run task
+[2025-05-21T00:12:43.387+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'aircraft_extraction', 'manual__2025-05-21T00:12:38.907965+00:00', '--job-id', '66', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmpzlp4f9uj']
+[2025-05-21T00:12:43.394+0000] {standard_task_runner.py:105} INFO - Job 66: Subtask aircraft_extraction
+[2025-05-21T00:12:43.499+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.aircraft_extraction manual__2025-05-21T00:12:38.907965+00:00 [running]> on host 7f42758d044f
+[2025-05-21T00:12:43.684+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='aircraft_extraction' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T00:12:38.907965+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T00:12:38.907965+00:00'
+[2025-05-21T00:12:43.691+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T00:12:43.719+0000] {python.py:240} INFO - Done. Returned value was: [{'aircraft_df_type': 'A320', 'engine_model': 'CFM56', 'manufacturer': 'Airbus', 'nb_seats': 180}, {'aircraft_df_type': 'A319', 'engine_model': 'V2500', 'manufacturer': 'Airbus', 'nb_seats': 150}, {'aircraft_df_type': 'B737', 'engine_model': 'CFM56', 'manufacturer': 'Boeing', 'nb_seats': 160}, {'aircraft_df_type': 'B777', 'engine_model': 'GE90', 'manufacturer': 'Boeing', 'nb_seats': 350}, {'aircraft_df_type': 'A350', 'engine_model': 'TRENT900', 'manufacturer': 'Airbus', 'nb_seats': 300}, {'aircraft_df_type': 'A380', 'engine_model': 'TRENT900', 'manufacturer': 'Airbus', 'nb_seats': 550}, {'aircraft_df_type': 'B787', 'engine_model': 'GENX', 'manufacturer': 'Boeing', 'nb_seats': 280}, {'aircraft_df_type': 'E190', 'engine_model': 'CF34', 'manufacturer': 'Embraer', 'nb_seats': 100}]
+[2025-05-21T00:12:43.785+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T00:12:43.786+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=aircraft_extraction, run_id=manual__2025-05-21T00:12:38.907965+00:00, execution_date=20250521T001238, start_date=20250521T001243, end_date=20250521T001243
+[2025-05-21T00:12:43.887+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T00:12:43.950+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T00:12:43.953+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

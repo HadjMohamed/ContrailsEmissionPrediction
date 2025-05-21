@@ -1,0 +1,20 @@
+[2025-05-20T16:55:51.183+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-20T16:55:51.232+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.run_merge manual__2025-05-20T16:50:39.739472+00:00 [queued]>
+[2025-05-20T16:55:51.256+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.run_merge manual__2025-05-20T16:50:39.739472+00:00 [queued]>
+[2025-05-20T16:55:51.257+0000] {taskinstance.py:2867} INFO - Starting attempt 2 of 2
+[2025-05-20T16:55:51.279+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): run_merge> on 2025-05-20 16:50:39.739472+00:00
+[2025-05-20T16:55:51.295+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1300) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-05-20T16:55:51.298+0000] {standard_task_runner.py:72} INFO - Started process 1302 to run task
+[2025-05-20T16:55:51.300+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'run_merge', 'manual__2025-05-20T16:50:39.739472+00:00', '--job-id', '67', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmppbaamalt']
+[2025-05-20T16:55:51.304+0000] {standard_task_runner.py:105} INFO - Job 67: Subtask run_merge
+[2025-05-20T16:55:51.394+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.run_merge manual__2025-05-20T16:50:39.739472+00:00 [running]> on host e9df7b98481e
+[2025-05-20T16:55:52.311+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='run_merge' AIRFLOW_CTX_EXECUTION_DATE='2025-05-20T16:50:39.739472+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-20T16:50:39.739472+00:00'
+[2025-05-20T16:55:52.313+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-20T16:55:52.373+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-05-20T16:55:52.394+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-20T16:55:52.395+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=run_merge, run_id=manual__2025-05-20T16:50:39.739472+00:00, execution_date=20250520T165039, start_date=20250520T165551, end_date=20250520T165552
+[2025-05-20T16:55:52.482+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-20T16:55:52.512+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-20T16:55:52.515+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

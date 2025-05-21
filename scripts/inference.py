@@ -1,34 +1,23 @@
-from scripts.preprocess import preprocess_df
+import pandas as pd
+from loguru import logger
+
 from scripts.predictor import ContrailPredictor
 
-
-import pandas as pd
-import os
-import sys
-import numpy as np
-from loguru import logger
-from xgboost import XGBRegressor
-    
-def run_inference(input_path: str, output_path: str):
+def run_inference(preprocessed_df: pd.DataFrame)-> pd.DataFrame:
     """
-    Run inference on the merged input data using the trained model and save the results.
+    Run inference on the merged and preprocessed input data using the trained model and save the results.
     Args:
         input_path (str): Path to the merged input CSV file.
         output_path (str): Path to save the output CSV file with predictions.
     """
-    try:
-        merged_df = pd.read_csv(input_path)
-    except FileNotFoundError:
-        logger.error(f"Input file not found at : {input_path}")
-        sys.exit(1)
-        
     # Preprocessing & Prediction     
-    df_predict=merged_df.copy() 
+    df_predict=preprocessed_df.copy() 
     predictor = ContrailPredictor()
     y_pred = predictor.predict_contrails(df_predict)
-    merged_df["Predicted_Contrail_Impact"] = y_pred
+    df_predict["Predicted_Contrail_Impact"] = y_pred
+    logger.success(f"Predictions succeeded !")
     
-    # Saving
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    merged_df.to_csv(output_path, index=False)
-    logger.success(f"Predictions saved to {output_path}")
+    # Decode features
+    df_predict = predictor.decode_features(df_predict)
+
+    return df_predict

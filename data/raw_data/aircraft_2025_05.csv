@@ -1,0 +1,10 @@
+aircraft_df_type,engine_model,manufacturer,nb_seats
+A320,PW1127G-JM,Airbus,180
+A319,V2500,Airbus,150
+B737,CFM56,Boeing,160
+B777,GE90,Boeing,350
+A350,TRENT900,Airbus,300
+A380,TRENT900,Airbus,550
+B787,GENX,Boeing,280
+E190,CF34,Embraer,100
+A20N,PW1127G-JM,Airbus,186.0

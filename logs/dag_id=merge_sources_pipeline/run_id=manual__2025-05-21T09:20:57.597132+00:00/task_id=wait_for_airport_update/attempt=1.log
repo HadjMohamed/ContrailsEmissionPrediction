@@ -1,0 +1,18 @@
+[2025-05-21T09:21:03.300+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T09:21:03.345+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.wait_for_airport_update manual__2025-05-21T09:20:57.597132+00:00 [queued]>
+[2025-05-21T09:21:03.369+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.wait_for_airport_update manual__2025-05-21T09:20:57.597132+00:00 [queued]>
+[2025-05-21T09:21:03.370+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-05-21T09:21:03.412+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): wait_for_airport_update> on 2025-05-21 09:20:57.597132+00:00
+[2025-05-21T09:21:03.454+0000] {standard_task_runner.py:72} INFO - Started process 738 to run task
+[2025-05-21T09:21:03.479+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'wait_for_airport_update', 'manual__2025-05-21T09:20:57.597132+00:00', '--job-id', '90', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmp99twha1u']
+[2025-05-21T09:21:03.492+0000] {standard_task_runner.py:105} INFO - Job 90: Subtask wait_for_airport_update
+[2025-05-21T09:21:03.694+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.wait_for_airport_update manual__2025-05-21T09:20:57.597132+00:00 [running]> on host c735ccec6410
+[2025-05-21T09:21:03.915+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='wait_for_airport_update' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T09:20:57.597132+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T09:20:57.597132+00:00'
+[2025-05-21T09:21:03.925+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T09:21:04.178+0000] {logging_mixin.py:190} INFO - Airports last updated on: 2025-05-21 01:53:11+00:00
+[2025-05-21T09:21:04.180+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-05-21T09:21:04.210+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T09:21:04.212+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=wait_for_airport_update, run_id=manual__2025-05-21T09:20:57.597132+00:00, execution_date=20250521T092057, start_date=20250521T092103, end_date=20250521T092104
+[2025-05-21T09:21:04.341+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T09:21:04.436+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T09:21:04.440+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

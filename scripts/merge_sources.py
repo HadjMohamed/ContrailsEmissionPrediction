@@ -2,13 +2,15 @@ import pandas as pd
 from pathlib import Path
 import os
 
+from scripts.config import IATA_COL, ICAO_COL
+
 def merge_sources(
-    flight_path: str, 
-    aircraft_path: str, 
-    airport_path: str, 
-    output_path: str) -> pd.DataFrame:
+    flight_df: pd.DataFrame, 
+    aircraft_df: pd.DataFrame, 
+    airport_df: pd.DataFrame
+    ) -> pd.DataFrame:
     """
-    Merges flight, aircraft_df and airport datasets into a single DataFrame ready for inference.
+    Dynamically merges flight, aircraft_df and airport datasets based on the configuration defined in MERGE_CONFIG..
     - Enriches aircraft_df_type with engine_model and other aircraft_df info
     - Maps IATA airport codes to OACI ones in order to be compatible with the model requirements
 
@@ -18,42 +20,23 @@ def merge_sources(
     Returns:
         pd.DataFrame: Final merged DataFrame
     """
-    # Load raw data
-    flights_df = pd.read_csv(flight_path)
-    aircraft_df = pd.read_csv(aircraft_path)
-    airports_df = pd.read_csv(airport_path)
+    df = pd.merge(
+        flight_df,
+        airport_df[[IATA_COL, ICAO_COL]],
+        left_on="origin",
+        right_on=IATA_COL,
+        how="left"
+    ).drop(columns=["origin", IATA_COL]).rename(columns={ICAO_COL: "origin"})
 
-    # Merge aircraft_df info via aircraft_df_type
-    df = pd.merge(flights_df, aircraft_df, on="aircraft_df_type", how="left")
-
-    # Merge origin OACI code
     df = pd.merge(
         df,
-        airports_df[["code_iata", "code_oaci"]].rename(columns={
-            "code_iata": "origin",
-            "code_oaci": "origin_oaci"
-        }),
-        on="origin",
+        airport_df[[IATA_COL, ICAO_COL]],
+        left_on="destination",
+        right_on=IATA_COL,
         how="left"
-    )
-
-    # Merge destination OACI code
-    df = pd.merge(
-        df,
-        airports_df[["code_iata", "code_oaci"]].rename(columns={
-            "code_iata": "destination",
-            "code_oaci": "destination_oaci"
-        }),
-        on="destination",
-        how="left"
-    )
-
-    # Replace origin/destination with OACI codes
-    df["origin"] = df["origin_oaci"]
-    df["destination"] = df["destination_oaci"]
-    df.drop(columns=["origin_oaci", "destination_oaci"], inplace=True)
-
-    # Saving
-    df.to_csv(output_path, index=False)
+    ).drop(columns=["destination", IATA_COL]).rename(columns={ICAO_COL: "destination"})
+    
+    df = pd.merge(df, aircraft_df, on="aircraft_df_type", how="left")
 
     return df
+

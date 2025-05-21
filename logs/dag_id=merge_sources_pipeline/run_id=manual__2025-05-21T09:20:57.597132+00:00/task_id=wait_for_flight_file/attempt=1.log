@@ -1,0 +1,23 @@
+[2025-05-21T09:21:03.265+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T09:21:03.310+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: merge_sources_pipeline.wait_for_flight_file manual__2025-05-21T09:20:57.597132+00:00 [queued]>
+[2025-05-21T09:21:03.334+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: merge_sources_pipeline.wait_for_flight_file manual__2025-05-21T09:20:57.597132+00:00 [queued]>
+[2025-05-21T09:21:03.336+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-05-21T09:21:03.369+0000] {taskinstance.py:2890} INFO - Executing <Task(FileSensor): wait_for_flight_file> on 2025-05-21 09:20:57.597132+00:00
+[2025-05-21T09:21:03.404+0000] {standard_task_runner.py:72} INFO - Started process 736 to run task
+[2025-05-21T09:21:03.414+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'merge_sources_pipeline', 'wait_for_flight_file', 'manual__2025-05-21T09:20:57.597132+00:00', '--job-id', '89', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmphlvl9k05']
+[2025-05-21T09:21:03.425+0000] {standard_task_runner.py:105} INFO - Job 89: Subtask wait_for_flight_file
+[2025-05-21T09:21:03.637+0000] {task_command.py:467} INFO - Running <TaskInstance: merge_sources_pipeline.wait_for_flight_file manual__2025-05-21T09:20:57.597132+00:00 [running]> on host c735ccec6410
+[2025-05-21T09:21:03.876+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='merge_sources_pipeline' AIRFLOW_CTX_TASK_ID='wait_for_flight_file' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T09:20:57.597132+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T09:20:57.597132+00:00'
+[2025-05-21T09:21:03.880+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T09:21:03.887+0000] {baseoperator.py:423} WARNING - FileSensor.execute cannot be called outside TaskInstance!
+[2025-05-21T09:21:03.953+0000] {base.py:84} INFO - Retrieving connection 'fs_default'
+[2025-05-21T09:21:03.955+0000] {filesystem.py:109} INFO - Poking for file /opt/***/data/raw_data/flight_2025_05.csv
+[2025-05-21T09:21:03.958+0000] {filesystem.py:113} INFO - Found File /opt/***/data/raw_data/flight_2025_05.csv last modified: 20250521090636
+[2025-05-21T09:21:03.959+0000] {base.py:339} INFO - Success criteria met. Exiting.
+[2025-05-21T09:21:03.959+0000] {filesystem.py:109} INFO - Poking for file /opt/***/data/raw_data/flight_2025_05.csv
+[2025-05-21T09:21:03.960+0000] {filesystem.py:113} INFO - Found File /opt/***/data/raw_data/flight_2025_05.csv last modified: 20250521090636
+[2025-05-21T09:21:03.982+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T09:21:03.983+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=merge_sources_pipeline, task_id=wait_for_flight_file, run_id=manual__2025-05-21T09:20:57.597132+00:00, execution_date=20250521T092057, start_date=20250521T092103, end_date=20250521T092103
+[2025-05-21T09:21:04.102+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T09:21:04.203+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T09:21:04.206+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
