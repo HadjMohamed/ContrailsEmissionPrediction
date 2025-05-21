@@ -1,7 +1,9 @@
 import os
+import sys
 import joblib
 import pandas as pd
 from xgboost import XGBRegressor
+from dotenv import load_dotenv
 
 from contrails.config import BASE_MODEL_DIR, MODEL_FILE, ENCODER_FILE, FEATURE_FILE
 
