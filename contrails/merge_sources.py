@@ -1,8 +1,6 @@
 import pandas as pd
-from pathlib import Path
-import os
 
-from scripts.config import IATA_COL, ICAO_COL
+from contrails.config import IATA_COL, ICAO_COL
 
 def merge_sources(
     flight_df: pd.DataFrame, 
@@ -10,7 +8,7 @@ def merge_sources(
     airport_df: pd.DataFrame
     ) -> pd.DataFrame:
     """
-    Dynamically merges flight, aircraft_df and airport datasets based on the configuration defined in MERGE_CONFIG..
+    Merges flight, aircraft_df and airport datasets 
     - Enriches aircraft_df_type with engine_model and other aircraft_df info
     - Maps IATA airport codes to OACI ones in order to be compatible with the model requirements
 

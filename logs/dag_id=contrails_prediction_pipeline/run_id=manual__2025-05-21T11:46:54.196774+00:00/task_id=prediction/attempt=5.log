@@ -1,0 +1,18 @@
+[2025-05-21T12:03:40.246+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T12:03:40.291+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.prediction manual__2025-05-21T11:46:54.196774+00:00 [queued]>
+[2025-05-21T12:03:40.318+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.prediction manual__2025-05-21T11:46:54.196774+00:00 [queued]>
+[2025-05-21T12:03:40.319+0000] {taskinstance.py:2867} INFO - Starting attempt 5 of 6
+[2025-05-21T12:03:40.345+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): prediction> on 2025-05-21 11:46:54.196774+00:00
+[2025-05-21T12:03:40.365+0000] {standard_task_runner.py:72} INFO - Started process 413 to run task
+[2025-05-21T12:03:40.374+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'contrails_prediction_pipeline', 'prediction', 'manual__2025-05-21T11:46:54.196774+00:00', '--job-id', '151', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmpzm6z155g']
+[2025-05-21T12:03:40.383+0000] {standard_task_runner.py:105} INFO - Job 151: Subtask prediction
+[2025-05-21T12:03:40.509+0000] {task_command.py:467} INFO - Running <TaskInstance: contrails_prediction_pipeline.prediction manual__2025-05-21T11:46:54.196774+00:00 [running]> on host 71f2da9c2e69
+[2025-05-21T12:03:40.686+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='contrails_prediction_pipeline' AIRFLOW_CTX_TASK_ID='prediction' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T11:46:54.196774+00:00' AIRFLOW_CTX_TRY_NUMBER='5' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T11:46:54.196774+00:00'
+[2025-05-21T12:03:40.690+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T12:03:40.761+0000] {log.py:232} WARNING - 2025-05-21 12:03:40.760 | SUCCESS  | contrails.inference:run_inference:19 - Predictions succeeded !
+[2025-05-21T12:03:40.772+0000] {python.py:240} INFO - Done. Returned value was: [{'Aircraft': 'A320', 'Engine': 'PW1127G-JM', 'Seats': 180.0, 'Origin Airport': 'GCLP', 'Destination Airport': 'LEBL', 'Distance Flown (km)': 5500, 'CO2 (kgCO2e)': 1287.93, 'Month': 1, 'Day': 9, 'Weekday': 3, 'Takeoff_Hour': 15, 'Predicted_Contrail_Impact': 333148.9375}]
+[2025-05-21T12:03:40.818+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T12:03:40.819+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=contrails_prediction_pipeline, task_id=prediction, run_id=manual__2025-05-21T11:46:54.196774+00:00, execution_date=20250521T114654, start_date=20250521T120340, end_date=20250521T120340
+[2025-05-21T12:03:40.914+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T12:03:40.956+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T12:03:40.960+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

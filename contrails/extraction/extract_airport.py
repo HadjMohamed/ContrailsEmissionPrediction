@@ -3,7 +3,7 @@ import requests
 from io import StringIO
 from datetime import datetime
 
-from scripts.config import AIRPORTS_URL, IATA_COL, ICAO_COL, AIRPORTS_API
+from contrails.config import AIRPORTS_URL, IATA_COL, ICAO_COL, AIRPORTS_API
 
 def get_airports_last_modified():
     """

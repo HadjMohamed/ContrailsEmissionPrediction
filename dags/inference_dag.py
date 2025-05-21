@@ -1,20 +1,24 @@
-from airflow import DAG
-from airflow.decorators import task
-from airflow.sensors.filesystem import FileSensor
+from airflow import DAG # type: ignore
+from airflow.decorators import task # type: ignore
+from airflow.sensors.filesystem import FileSensor # type: ignore
 from datetime import datetime, timedelta
-from pathlib import Path
-#from google.cloud import bigquery
+from loguru import logger
 import pandas as pd
 import os
 
-# Local package import
-from scripts.config import RAW_DATA_DIR, BASE_MODEL_DIR,ENCODER_FILE
-from scripts.extraction.extract_airport import extract_airport, get_airports_last_modified
-from scripts.extraction.extract_aircraft import extract_aircraft
-from scripts.extraction.extract_flight import extract_flight
-from scripts.merge_sources import merge_sources
-from scripts.preprocess import preprocess_df
-from scripts.inference import run_inference
+from contrails.config import RAW_DATA_DIR, BASE_MODEL_DIR,ENCODER_FILE
+from contrails.extraction.extract_airport import extract_airport, get_airports_last_modified
+from contrails.extraction.extract_aircraft import extract_aircraft
+from contrails.extraction.extract_flight import extract_flight
+from contrails.merge_sources import merge_sources
+from contrails.preprocess import preprocess_df
+from contrails.inference import run_inference
+
+"""
+This DAG is designed to run the contrail prediction pipeline on a monthly basis on the first day of each month
+For that, it waits for the files during 31 days in order to cover all the cases.
+It will then extract the data from the files, merge them, preprocess them and run the inference.
+"""
 
 default_args = {
     'owner': 'airflow',
@@ -25,7 +29,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="merge_sources_pipeline",
+    dag_id="contrails_prediction_pipeline",
     default_args=default_args,
     schedule_interval="@monthly",  
     catchup=False,
@@ -48,13 +52,13 @@ with DAG(
     mode="reschedule"  
     )
     
-    @task
+    @task(retries=124, retry_delay=timedelta(hours=6))    
     def wait_for_airport_update(**context):
         execution_date = context["execution_date"]
         last_mod = get_airports_last_modified()
         if execution_date.date() > last_mod.date():
-            raise ValueError(f"Airports data too old: last modified at {last_mod}, expected at least {execution_date}")
-        print(f"Airports last updated on: {last_mod}")
+            raise Exception(f"Airports data too old: last modified at {last_mod}, expected at least {execution_date}")
+        logger.info(f"Airports last updated on: {last_mod}")
         
     @task
     def airport_extraction():
@@ -85,8 +89,7 @@ with DAG(
     @task
     def preprocessing(merged_data):
         merged_df = pd.DataFrame(merged_data)
-        label_encoders_path = os.path.join(BASE_MODEL_DIR, ENCODER_FILE)
-        preprocessed_df = preprocess_df(merged_df, label_encoders_path)
+        preprocessed_df = preprocess_df(merged_df)
         return preprocessed_df.to_dict(orient="records")
     
     @task
@@ -94,27 +97,6 @@ with DAG(
         preprocessed_df = pd.DataFrame(preprocessed_data)
         result_df = run_inference(preprocessed_df)
         return result_df.to_dict(orient="records")
-    
-    # @task
-    # def write_to_bigquery(prediction_result: list[dict]):
-    #     """
-    #     Inserts prediction results into a BigQuery table.
-
-    #     Args:
-    #         prediction_result (list[dict]): The list of prediction results to insert into BigQuery.
-    #     """
-    #     client = bigquery.Client()
-
-    #     # Replace with your actual table ID
-    #     table_id = "your-project-id.your_dataset.your_table"
-
-    #     # Insert rows
-    #     errors = client.insert_rows_json(table_id, prediction_result)
-
-    #     if errors:
-    #         raise RuntimeError(f"Failed to insert rows into BigQuery: {errors}")
-    
-    # Task dependencies
 
     # Initialize tasks
     flights = flight_extraction()

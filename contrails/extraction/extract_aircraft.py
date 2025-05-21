@@ -1,7 +1,5 @@
 import pandas as pd
 from pathlib import Path
-import os
-
 
 def extract_aircraft(path: str) -> pd.DataFrame:
     """

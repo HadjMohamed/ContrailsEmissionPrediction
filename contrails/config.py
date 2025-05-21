@@ -17,9 +17,8 @@ AIRPORTS_URL = os.getenv("AIRPORTS_URL", "")
 IATA_COL = "iata_code"
 ICAO_COL = "icao_code"
 
-
 COLUMN_MAPPING = {
-    # Expected column name : Actual column name in the merged CSV
+    # Expected model column name : Column name in the merged CSV (value to adapt)
     "Aircraft": "aircraft_df_type",
     "Engine": "engine_model",
     "Seats": "nb_seats",

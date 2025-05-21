@@ -1,0 +1,18 @@
+[2025-05-21T12:25:26.427+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T12:25:26.477+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.wait_for_airport_update manual__2025-05-21T12:25:21.841644+00:00 [queued]>
+[2025-05-21T12:25:26.497+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.wait_for_airport_update manual__2025-05-21T12:25:21.841644+00:00 [queued]>
+[2025-05-21T12:25:26.498+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-05-21T12:25:26.525+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): wait_for_airport_update> on 2025-05-21 12:25:21.841644+00:00
+[2025-05-21T12:25:26.555+0000] {standard_task_runner.py:72} INFO - Started process 701 to run task
+[2025-05-21T12:25:26.574+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'contrails_prediction_pipeline', 'wait_for_airport_update', 'manual__2025-05-21T12:25:21.841644+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmp0cal_jbw']
+[2025-05-21T12:25:26.585+0000] {standard_task_runner.py:105} INFO - Job 154: Subtask wait_for_airport_update
+[2025-05-21T12:25:26.722+0000] {task_command.py:467} INFO - Running <TaskInstance: contrails_prediction_pipeline.wait_for_airport_update manual__2025-05-21T12:25:21.841644+00:00 [running]> on host 71f2da9c2e69
+[2025-05-21T12:25:26.917+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='contrails_prediction_pipeline' AIRFLOW_CTX_TASK_ID='wait_for_airport_update' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T12:25:21.841644+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T12:25:21.841644+00:00'
+[2025-05-21T12:25:26.920+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T12:25:27.344+0000] {logging_mixin.py:190} INFO - Airports last updated on: 2025-05-21 01:53:11+00:00
+[2025-05-21T12:25:27.344+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-05-21T12:25:27.366+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T12:25:27.367+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=contrails_prediction_pipeline, task_id=wait_for_airport_update, run_id=manual__2025-05-21T12:25:21.841644+00:00, execution_date=20250521T122521, start_date=20250521T122526, end_date=20250521T122527
+[2025-05-21T12:25:27.478+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T12:25:27.552+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T12:25:27.556+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

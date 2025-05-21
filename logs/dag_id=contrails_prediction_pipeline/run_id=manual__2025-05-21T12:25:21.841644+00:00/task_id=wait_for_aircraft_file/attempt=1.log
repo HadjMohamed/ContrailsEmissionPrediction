@@ -1,0 +1,23 @@
+[2025-05-21T12:25:26.419+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-05-21T12:25:26.463+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.wait_for_aircraft_file manual__2025-05-21T12:25:21.841644+00:00 [queued]>
+[2025-05-21T12:25:26.482+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: contrails_prediction_pipeline.wait_for_aircraft_file manual__2025-05-21T12:25:21.841644+00:00 [queued]>
+[2025-05-21T12:25:26.482+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-05-21T12:25:26.514+0000] {taskinstance.py:2890} INFO - Executing <Task(FileSensor): wait_for_aircraft_file> on 2025-05-21 12:25:21.841644+00:00
+[2025-05-21T12:25:26.544+0000] {standard_task_runner.py:72} INFO - Started process 699 to run task
+[2025-05-21T12:25:26.560+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'contrails_prediction_pipeline', 'wait_for_aircraft_file', 'manual__2025-05-21T12:25:21.841644+00:00', '--job-id', '153', '--raw', '--subdir', 'DAGS_FOLDER/inference_dag.py', '--cfg-path', '/tmp/tmphf_mbeir']
+[2025-05-21T12:25:26.573+0000] {standard_task_runner.py:105} INFO - Job 153: Subtask wait_for_aircraft_file
+[2025-05-21T12:25:26.724+0000] {task_command.py:467} INFO - Running <TaskInstance: contrails_prediction_pipeline.wait_for_aircraft_file manual__2025-05-21T12:25:21.841644+00:00 [running]> on host 71f2da9c2e69
+[2025-05-21T12:25:26.943+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='contrails_prediction_pipeline' AIRFLOW_CTX_TASK_ID='wait_for_aircraft_file' AIRFLOW_CTX_EXECUTION_DATE='2025-05-21T12:25:21.841644+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-21T12:25:21.841644+00:00'
+[2025-05-21T12:25:26.945+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-05-21T12:25:26.950+0000] {baseoperator.py:423} WARNING - FileSensor.execute cannot be called outside TaskInstance!
+[2025-05-21T12:25:26.988+0000] {base.py:84} INFO - Retrieving connection 'fs_default'
+[2025-05-21T12:25:26.989+0000] {filesystem.py:109} INFO - Poking for file /opt/***/data/raw_data/aircraft_2025_05.csv
+[2025-05-21T12:25:26.990+0000] {filesystem.py:113} INFO - Found File /opt/***/data/raw_data/aircraft_2025_05.csv last modified: 20250521101018
+[2025-05-21T12:25:26.992+0000] {base.py:339} INFO - Success criteria met. Exiting.
+[2025-05-21T12:25:26.992+0000] {filesystem.py:109} INFO - Poking for file /opt/***/data/raw_data/aircraft_2025_05.csv
+[2025-05-21T12:25:26.993+0000] {filesystem.py:113} INFO - Found File /opt/***/data/raw_data/aircraft_2025_05.csv last modified: 20250521101018
+[2025-05-21T12:25:27.013+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-05-21T12:25:27.015+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=contrails_prediction_pipeline, task_id=wait_for_aircraft_file, run_id=manual__2025-05-21T12:25:21.841644+00:00, execution_date=20250521T122521, start_date=20250521T122526, end_date=20250521T122527
+[2025-05-21T12:25:27.097+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-05-21T12:25:27.171+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-05-21T12:25:27.174+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,23 +1,28 @@
 import pandas as pd
 import joblib
 
-from scripts.config import COLUMN_MAPPING
+from contrails.config import COLUMN_MAPPING
 
 def validate_input(df: pd.DataFrame):
+    """
+    Checks if the input DataFrame has the model required columns.
+    Args:
+        df (pd.DataFrame): DataFrame to validate
+    Raises:
+        ValueError: If any required columns are missing
+    """
     required_cols = list(COLUMN_MAPPING.values())
     missing_cols = [col for col in required_cols if col not in df.columns]
     if missing_cols:
         raise ValueError(f"Missing required columns in input data: {missing_cols}")
 
-def preprocess_df(df: pd.DataFrame, label_encoders_path:str):
+def preprocess_df(df: pd.DataFrame):
     """
     Preprocess the input DataFrame for inference.
     - Handles date feature extraction
-    - Encodes categorical features
     - Filters invalid rows 
     Args:
         df (pd.DataFrame): Merged DataFrame to preprocess
-        label_encoders_path (str): Path to the label encoders file
     Returns:
         df (pd.DataFrame): Cleaned and encoded dataframe
     """
@@ -45,23 +50,5 @@ def preprocess_df(df: pd.DataFrame, label_encoders_path:str):
     df.drop(columns=["Date", "Take-off Time (UTC)"], inplace=True, errors='ignore')
     df.drop_duplicates(inplace=True)
     df.dropna(inplace=True)
-
-    # Encoding
-    categorical_cols = ["Aircraft", "Engine", "Origin Airport", "Destination Airport"]
-    label_encoders = joblib.load(label_encoders_path)  
-    encoders = (label_encoders or {})
-
-    for col in categorical_cols:
-        df[col] = df[col].astype(str)
-        le = encoders.get(col)
-        if le is None:
-            raise ValueError(f"Missing LabelEncoder for column: {col}")
-
-        # Boolean mask 
-        known_labels = set(le.classes_)
-        mask_known = df[col].isin(known_labels)
-        df = df[mask_known]
-
-        df[col] = le.transform(df[col])
 
     return df
